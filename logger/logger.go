@@ -5,22 +5,23 @@ import (
 	"os"
 )
 
-func GetDebugLogger(fileName, appName string) (l *log.Logger) {
+var Exception *log.Logger
+var Error *log.Logger
+var Warning *log.Logger
+var Info *log.Logger
+var Debug *log.Logger
+
+func InitLogger(fileName, appName string) {
 	f, err := os.OpenFile(fileName, os.O_WRONLY|os.O_CREATE|os.O_APPEND, 0600)
 	if err != nil {
-		log.Println(err)
+		log.SetFlags(log.Lshortfile | log.LstdFlags)
+		log.Println("Error opening file:", err)
+		os.Exit(1)
 	}
-	l = log.New(f, " DEBUG "+appName+" ", log.LstdFlags)
-	log.SetFlags(log.Lshortfile | log.LstdFlags)
-	return
+	Exception = log.New(f, appName+" EXCEPTION ", log.Lshortfile|log.LstdFlags)
+	Error = log.New(f, appName+" ERROR ", log.Lshortfile|log.LstdFlags)
+	Warning = log.New(f, appName+" WARRING ", log.Lshortfile|log.LstdFlags)
+	Info = log.New(f, appName+" INFO ", log.Lshortfile|log.LstdFlags)
+	Debug = log.New(f, appName+" DEBUG ", log.Lshortfile|log.LstdFlags)
 }
 
-func GetInfoLogger(fileName, appName string) (l *log.Logger) {
-	f, err := os.OpenFile(fileName, os.O_WRONLY|os.O_CREATE|os.O_APPEND, 0600)
-	if err != nil {
-		log.Println(err)
-	}
-	l = log.New(f, " INFO "+appName+" ", log.LstdFlags)
-	log.SetFlags(log.Lshortfile | log.LstdFlags)
-	return
-}
