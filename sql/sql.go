@@ -16,7 +16,6 @@ type Database struct {
 	Password string
 	Schema   string
 	Type     string
-	LogLevel string
 	ConnPtr  *sql.DB
 }
 
