@@ -1,7 +1,6 @@
 package logger
 
 import (
-	"fmt"
 	"log"
 	"os"
 )
@@ -24,8 +23,4 @@ func InitLogger(fileName, appName string) {
 	Warning = log.New(f, appName+" WARRING ", log.Lshortfile|log.LstdFlags)
 	Info = log.New(f, appName+" INFO ", log.Lshortfile|log.LstdFlags)
 	Debug = log.New(f, appName+" DEBUG ", log.Lshortfile|log.LstdFlags)
-}
-
-func TestModule() {
-	fmt.Println("testing Moduler")
 }
