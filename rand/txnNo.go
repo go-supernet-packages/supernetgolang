@@ -1,4 +1,4 @@
-package txnno
+package rand
 
 import (
 	"fmt"
