@@ -14,14 +14,13 @@ var Debug *log.Logger
 func InitLogger(fileName, appName string) {
 	f, err := os.OpenFile(fileName, os.O_WRONLY|os.O_CREATE|os.O_APPEND, 0600)
 	if err != nil {
-		log.SetFlags(log.Lshortfile | log.LstdFlags)
+		log.SetFlags(log.Lshortfile | log.LstdFlags | log.Lmicroseconds)
 		log.Println("Error opening file:", err)
 		os.Exit(1)
 	}
-	Exception = log.New(f, appName+" EXCEPTION ", log.Lshortfile|log.LstdFlags)
-	Error = log.New(f, appName+" ERROR ", log.Lshortfile|log.LstdFlags)
-	Warning = log.New(f, appName+" WARRING ", log.Lshortfile|log.LstdFlags)
-	Info = log.New(f, appName+" INFO ", log.Lshortfile|log.LstdFlags)
-	Debug = log.New(f, appName+" DEBUG ", log.Lshortfile|log.LstdFlags)
+	Exception = log.New(f, appName+" EXCEPTION ", log.Lshortfile|log.LstdFlags|log.Lmicroseconds)
+	Error = log.New(f, appName+" ERROR ", log.Lshortfile|log.LstdFlags|log.Lmicroseconds)
+	Warning = log.New(f, appName+" WARRING ", log.Lshortfile|log.LstdFlags|log.Lmicroseconds)
+	Info = log.New(f, appName+" INFO ", log.Lshortfile|log.LstdFlags|log.Lmicroseconds)
+	Debug = log.New(f, appName+" DEBUG ", log.Lshortfile|log.LstdFlags|log.Lmicroseconds)
 }
-
